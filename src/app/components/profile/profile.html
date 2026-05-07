@@ -1,0 +1,31 @@
+<h2 class="mb-4">Profile</h2>
+
+<mat-card class="profile-card">
+  <mat-card-content>
+    <p>
+      Email:
+      <strong>{{ authService.currentUser()?.email || 'Not logged in' }}</strong>
+    </p>
+
+    <div class="profile-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Name</mat-label>
+
+        <input matInput [ngModel]="displayName()" (ngModelChange)="displayName.set($event)" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Monthly Budget Goal</mat-label>
+
+        <input
+          matInput
+          type="number"
+          [ngModel]="monthlyGoal()"
+          (ngModelChange)="monthlyGoal.set($event)"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="saveProfile()">Save Profile</button>
+    </div>
+  </mat-card-content>
+</mat-card>
