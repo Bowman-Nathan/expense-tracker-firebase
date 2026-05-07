@@ -50,8 +50,8 @@ export class ExpenseService {
   }
 
   totalExpense = computed(() =>
-    this.expenses().reduce((sum, expense) => sum + Number(expense.amount), 0)
-  );
+  this.totalExpensesOnly()
+);
 
   highestExpense = computed(() => {
     if (this.expenses().length === 0) {
@@ -68,6 +68,22 @@ export class ExpenseService {
 
     return this.totalExpense() / this.expenses().length;
   });
+
+  totalIncome = computed(() =>
+  this.expenses()
+    .filter(expense => expense.type === 'Income')
+    .reduce((sum, expense) => sum + Number(expense.amount), 0)
+);
+
+totalExpensesOnly = computed(() =>
+  this.expenses()
+    .filter(expense => expense.type === 'Expense')
+    .reduce((sum, expense) => sum + Number(expense.amount), 0)
+);
+
+balance = computed(() =>
+  this.totalIncome() - this.totalExpensesOnly()
+);
 
   transactionCount = computed(() => this.expenses().length);
 
