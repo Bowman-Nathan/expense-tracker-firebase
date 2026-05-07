@@ -5,19 +5,29 @@
     <div class="expense-form">
       <mat-form-field appearance="outline">
         <mat-label>Title</mat-label>
-
         <input matInput [(ngModel)]="title" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
         <mat-label>Amount</mat-label>
-
         <input matInput type="number" [(ngModel)]="amount" />
       </mat-form-field>
 
       <mat-form-field appearance="outline">
-        <mat-label>Category</mat-label>
+        <mat-label>Type</mat-label>
+        <mat-select [(ngModel)]="type">
+          <mat-option value="Expense">Expense</mat-option>
+          <mat-option value="Income">Income</mat-option>
+        </mat-select>
+      </mat-form-field>
 
+      <mat-form-field appearance="outline">
+        <mat-label>Date</mat-label>
+        <input matInput type="date" [(ngModel)]="date" />
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
         <mat-select [(ngModel)]="category">
           <mat-option value="Work">Work</mat-option>
           <mat-option value="Personal">Personal</mat-option>
@@ -29,7 +39,12 @@
         </mat-select>
       </mat-form-field>
 
-      <button mat-raised-button color="primary" (click)="addExpense()">Add Expense</button>
+      <mat-form-field appearance="outline">
+        <mat-label>Notes</mat-label>
+        <textarea matInput rows="3" [(ngModel)]="notes"></textarea>
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="addExpense()">Add Transaction</button>
     </div>
   </mat-card-content>
 </mat-card>

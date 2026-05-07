@@ -3,7 +3,10 @@
 
   <mat-card-content>
     <p>Amount: ${{ +expense.amount | number: '1.2-2' }}</p>
+    <p>Type: {{ expense.type }}</p>
     <p>Category: {{ expense.category }}</p>
+    <p>Date: {{ expense.date }}</p>
+    <p>Notes: {{ expense.notes }}</p>
   </mat-card-content>
 
   <mat-card-actions>

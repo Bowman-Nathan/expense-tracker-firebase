@@ -2,7 +2,7 @@ import { Component } from "@angular/core";
 import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ExpenseService } from "../../services/expense-service";
-import { ExpenseCategory } from "../../models/expense";
+import { ExpenseCategory, TransactionType } from "../../models/expense";
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
 import { MatSelectModule } from '@angular/material/select';
@@ -21,6 +21,9 @@ export class EditExpenseComponent {
     title = '';
     amount= 0;
     category: ExpenseCategory='Personal';
+    type: TransactionType = 'Expense';
+    date = '';
+    notes = '';
 
     constructor(
         public expenseService: ExpenseService,
@@ -35,6 +38,9 @@ export class EditExpenseComponent {
             this.title = expense.title;
             this.amount = expense.amount;
             this.category = expense.category;
+            this.type = expense.type;
+            this.date = expense.date;
+            this.notes = expense.notes;
         }
     }
 
@@ -47,9 +53,12 @@ export class EditExpenseComponent {
             id: this.id,
             title: this.title,
             amount: this.amount,
-            category: this.category
+            category: this.category,
+            type: this.type,
+            date: this.date,
+            notes: this.notes
         });
 
-        this.router.navigate(['/expenses']);4
+        this.router.navigate(['/expenses']);
     }
 }

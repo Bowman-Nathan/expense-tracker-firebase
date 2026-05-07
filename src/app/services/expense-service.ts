@@ -13,7 +13,7 @@ import {
 } from 'firebase/firestore';
 
 import { environment } from '../../environments/environment';
-import { Expense, ExpenseCategory } from '../models/expense';
+import { Expense, ExpenseCategory, TransactionType } from '../models/expense';
 
 @Injectable({
   providedIn: 'root'
@@ -71,13 +71,23 @@ export class ExpenseService {
 
   transactionCount = computed(() => this.expenses().length);
 
-  async addExpense(title: string, amount: number, category: ExpenseCategory) {
-    await addDoc(this.expensesCollection, {
-      title,
-      amount: Number(amount),
-      category
-    });
-  }
+    async addExpense(
+      title: string,
+      amount: number,
+      category: ExpenseCategory,
+      type: TransactionType,
+      date: string,
+      notes: string
+    ) {
+      await addDoc(this.expensesCollection, {
+        title,
+        amount: Number(amount),
+        category,
+        type,
+        date,
+        notes
+      });
+    }
 
   async deleteExpense(id: string) {
     await deleteDoc(doc(this.firestore, `expenses/${id}`));
