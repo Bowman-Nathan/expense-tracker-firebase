@@ -1,19 +1,40 @@
 <h2 class="mb-4">Expenses</h2>
 
-<mat-form-field appearance="outline">
-  <mat-label>Filter by Category</mat-label>
+<div class="filter-row">
+  <mat-form-field appearance="outline">
+    <mat-label>Filter by Category</mat-label>
+    <mat-select [ngModel]="selectedCategory()" (ngModelChange)="selectedCategory.set($event)">
+      <mat-option value="All">All</mat-option>
+      <mat-option value="Work">Work</mat-option>
+      <mat-option value="Personal">Personal</mat-option>
+      <mat-option value="Grocery">Grocery</mat-option>
+      <mat-option value="Utilities">Utilities</mat-option>
+      <mat-option value="Shopping">Shopping</mat-option>
+      <mat-option value="Travel">Travel</mat-option>
+      <mat-option value="Food">Food</mat-option>
+    </mat-select>
+  </mat-form-field>
 
-  <mat-select [ngModel]="selectedCategory()" (ngModelChange)="selectedCategory.set($event)">
-    <mat-option value="All">All</mat-option>
-    <mat-option value="Work">Work</mat-option>
-    <mat-option value="Personal">Personal</mat-option>
-    <mat-option value="Grocery">Grocery</mat-option>
-    <mat-option value="Utilities">Utilities</mat-option>
-    <mat-option value="Shopping">Shopping</mat-option>
-    <mat-option value="Travel">Travel</mat-option>
-    <mat-option value="Food">Food</mat-option>
-  </mat-select>
-</mat-form-field>
+  <label>
+    Start Date
+    <input
+      class="date-input"
+      type="date"
+      [ngModel]="startDate()"
+      (ngModelChange)="startDate.set($event)"
+    />
+  </label>
+
+  <label>
+    End Date
+    <input
+      class="date-input"
+      type="date"
+      [ngModel]="endDate()"
+      (ngModelChange)="endDate.set($event)"
+    />
+  </label>
+</div>
 
 @for (expense of expenses(); track expense.id) {
   <app-expense-item [expense]="expense" (delete)="deleteExpense($event)"> </app-expense-item>

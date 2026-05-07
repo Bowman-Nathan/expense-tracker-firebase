@@ -18,18 +18,28 @@ import { MatFormFieldModule } from '@angular/material/form-field';
 })
 export class ExpenseListComponent {
   selectedCategory = signal('All');
+  startDate = signal('');
+  endDate = signal('');
 
   constructor(public expenseService: ExpenseService) {}
 
   filteredExpenses = computed(() => {
-    if (this.selectedCategory() === 'All') {
-      return this.expenseService.expenses();
-    }
+  return this.expenseService.expenses().filter(expense => {
+    const categoryMatches =
+      this.selectedCategory() === 'All' ||
+      expense.category === this.selectedCategory();
 
-    return this.expenseService
-      .expenses()
-      .filter(expense => expense.category === this.selectedCategory());
+    const startMatches =
+      this.startDate() === '' ||
+      expense.date >= this.startDate();
+
+    const endMatches =
+      this.endDate() === '' ||
+      expense.date <= this.endDate();
+
+    return categoryMatches && startMatches && endMatches;
   });
+});
 
   expenses = this.filteredExpenses;
 
