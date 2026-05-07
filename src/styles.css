@@ -29,3 +29,8 @@ mat-form-field {
     margin-bottom: 16px;
     padding: 12px;
 }
+
+.chart-card {
+  margin-top: 24px;
+  padding: 16px;
+}

@@ -3,6 +3,7 @@
 <div class="dashboard-grid">
   <mat-card class="dashboard-card">
     <mat-card-title>Total Income</mat-card-title>
+
     <mat-card-content>
       <h2 class="amount text-success">${{ expenseService.totalIncome().toFixed(2) }}</h2>
     </mat-card-content>
@@ -10,6 +11,7 @@
 
   <mat-card class="dashboard-card">
     <mat-card-title>Total Expenses</mat-card-title>
+
     <mat-card-content>
       <h2 class="amount text-danger">${{ expenseService.totalExpensesOnly().toFixed(2) }}</h2>
     </mat-card-content>
@@ -17,6 +19,7 @@
 
   <mat-card class="dashboard-card">
     <mat-card-title>Balance</mat-card-title>
+
     <mat-card-content>
       <h2 class="amount">${{ expenseService.balance().toFixed(2) }}</h2>
     </mat-card-content>
@@ -24,6 +27,7 @@
 
   <mat-card class="dashboard-card">
     <mat-card-title>Transactions</mat-card-title>
+
     <mat-card-content>
       <h2 class="amount">
         {{ expenseService.transactionCount() }}
@@ -31,3 +35,26 @@
     </mat-card-content>
   </mat-card>
 </div>
+
+<mat-card class="chart-card">
+  <mat-card-title> Income vs Expenses </mat-card-title>
+
+  <mat-card-content>
+    <div class="chart-container">
+      <canvas
+        baseChart
+        [type]="'bar'"
+        [data]="{
+          labels: ['Income', 'Expenses'],
+          datasets: [
+            {
+              label: 'Amount',
+              data: [expenseService.totalIncome(), expenseService.totalExpensesOnly()],
+            },
+          ],
+        }"
+      >
+      </canvas>
+    </div>
+  </mat-card-content>
+</mat-card>
