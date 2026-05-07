@@ -58,3 +58,26 @@
     </div>
   </mat-card-content>
 </mat-card>
+
+<mat-card class="chart-card">
+  <mat-card-title> Category Spending </mat-card-title>
+
+  <mat-card-content>
+    <div class="chart-container">
+      <canvas
+        baseChart
+        [type]="'pie'"
+        [data]="{
+          labels: categoryLabels(),
+          datasets: [
+            {
+              label: 'Spending by Category',
+              data: categoryValues(),
+            },
+          ],
+        }"
+      >
+      </canvas>
+    </div>
+  </mat-card-content>
+</mat-card>

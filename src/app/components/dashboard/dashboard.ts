@@ -16,4 +16,11 @@ export class DashboardComponent {
 
   constructor(public expenseService: ExpenseService) {}
 
+  categoryLabels() {
+  return Object.keys(this.expenseService.categorySpending());
+}
+
+categoryValues() {
+  return Object.values(this.expenseService.categorySpending());
+}
 }

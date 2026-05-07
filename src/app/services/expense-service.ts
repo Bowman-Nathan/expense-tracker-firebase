@@ -85,6 +85,19 @@ balance = computed(() =>
   this.totalIncome() - this.totalExpensesOnly()
 );
 
+categorySpending = computed(() => {
+  const totals: Record<string, number> = {};
+
+  this.expenses()
+    .filter(expense => expense.type === 'Expense')
+    .forEach(expense => {
+      totals[expense.category] =
+        (totals[expense.category] || 0) + Number(expense.amount);
+    });
+
+  return totals;
+});
+
   transactionCount = computed(() => this.expenses().length);
 
     async addExpense(
