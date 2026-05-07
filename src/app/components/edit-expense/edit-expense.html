@@ -1,31 +1,35 @@
-<h2>Edit Expense</h2>
+<h2 class="mb-4">Edit Expense</h2>
 
-<div class="card p-4">
-  <div class="mb-3">
-    <label class="form-label">Title</label>
+<mat-card>
+  <mat-card-content>
+    <div class="expense-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Title</mat-label>
 
-    <input class="form-control" [(ngModel)]="title" />
-  </div>
+        <input matInput [(ngModel)]="title" />
+      </mat-form-field>
 
-  <div class="mb-3">
-    <label class="form-label">Amount</label>
+      <mat-form-field appearance="outline">
+        <mat-label>Amount</mat-label>
 
-    <input class="form-control" type="number" [(ngModel)]="amount" />
-  </div>
+        <input matInput type="number" [(ngModel)]="amount" />
+      </mat-form-field>
 
-  <div class="mb-3">
-    <label class="form-label">Category</label>
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
 
-    <select class="form-control" [(ngModel)]="category">
-      <option>Work</option>
-      <option>Personal</option>
-      <option>Grocery</option>
-      <option>Utilities</option>
-      <option>Shopping</option>
-      <option>Travel</option>
-      <option>Food</option>
-    </select>
+        <mat-select [(ngModel)]="category">
+          <mat-option value="Work">Work</mat-option>
+          <mat-option value="Personal">Personal</mat-option>
+          <mat-option value="Grocery">Grocery</mat-option>
+          <mat-option value="Utilities">Utilities</mat-option>
+          <mat-option value="Shopping">Shopping</mat-option>
+          <mat-option value="Travel">Travel</mat-option>
+          <mat-option value="Food">Food</mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <button class="btn btn-success" (click)="saveExpense()">Save Changes</button>
-  </div>
-</div>
+      <button mat-raised-button color="primary" (click)="saveExpense()">Save Changes</button>
+    </div>
+  </mat-card-content>
+</mat-card>

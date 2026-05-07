@@ -3,10 +3,16 @@ import { FormsModule } from "@angular/forms";
 import { ActivatedRoute, Router } from "@angular/router";
 import { ExpenseService } from "../../services/expense-service";
 import { ExpenseCategory } from "../../models/expense";
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatSelectModule } from '@angular/material/select';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @Component({
     selector: 'app-edit-expense',
-    imports: [FormsModule],
+    standalone: true,
+    imports: [FormsModule, MatFormFieldModule, MatInputModule, MatSelectModule, MatButtonModule, MatCardModule],
     templateUrl: './edit-expense.html'
 })
 
@@ -32,12 +38,12 @@ export class EditExpenseComponent {
         }
     }
 
-    saveExpense() {
+    async saveExpense() {
         if (this.title.trim() === '' || this.amount <= 0){
             return;
         }
 
-        this.expenseService.editExpense({
+        await this.expenseService.editExpense({
             id: this.id,
             title: this.title,
             amount: this.amount,
