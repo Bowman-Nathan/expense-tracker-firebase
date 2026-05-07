@@ -21,12 +21,12 @@ export class AddExpenseComponent {
 
 constructor(public expenseService: ExpenseService) {}
 
-addExpense() {
+async addExpense() {
     if (this.title.trim() === '' || this.amount <= 0) {
             return;
         }
 
-        this.expenseService.addExpense(this.title, this.amount, this.category);
+        await this.expenseService.addExpense(this.title, this.amount, this.category);
 
         this.title = '';
         this.amount = 0;

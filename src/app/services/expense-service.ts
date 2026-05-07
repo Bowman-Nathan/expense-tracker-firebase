@@ -1,24 +1,32 @@
 import { computed, Injectable, signal } from '@angular/core';
+
+import { initializeApp, getApp, getApps } from 'firebase/app';
+
+import {
+  getFirestore,
+  collection,
+  onSnapshot,
+  addDoc,
+  deleteDoc,
+  updateDoc,
+  doc
+} from 'firebase/firestore';
+
+import { environment } from '../../environments/environment';
 import { Expense, ExpenseCategory } from '../models/expense';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ExpenseService {
-  expenses = signal<Expense[]>([
-    {
-      id: '1',
-      title: 'Laptop',
-      amount: 1999.99,
-      category: 'Work'
-    },
-    {
-      id: '2',
-      title: 'Groceries',
-      amount: 210.67,
-      category: 'Grocery'
-    }
-  ]);
+  private firebaseApp = getApps().length
+    ? getApp()
+    : initializeApp(environment.firebase);
+
+  private firestore = getFirestore(this.firebaseApp);
+  private expensesCollection = collection(this.firestore, 'expenses');
+
+  expenses = signal<Expense[]>([]);
 
   categories = signal<ExpenseCategory[]>([
     'Work',
@@ -30,8 +38,19 @@ export class ExpenseService {
     'Food'
   ]);
 
+  constructor() {
+    onSnapshot(this.expensesCollection, snapshot => {
+      const expenses = snapshot.docs.map(document => ({
+        id: document.id,
+        ...document.data()
+      })) as Expense[];
+
+      this.expenses.set(expenses);
+    });
+  }
+
   totalExpense = computed(() =>
-    this.expenses().reduce((sum, expense) => sum + expense.amount, 0)
+    this.expenses().reduce((sum, expense) => sum + Number(expense.amount), 0)
   );
 
   highestExpense = computed(() => {
@@ -39,7 +58,7 @@ export class ExpenseService {
       return 0;
     }
 
-    return Math.max(...this.expenses().map(expense => expense.amount));
+    return Math.max(...this.expenses().map(expense => Number(expense.amount)));
   });
 
   averageExpense = computed(() => {
@@ -52,32 +71,27 @@ export class ExpenseService {
 
   transactionCount = computed(() => this.expenses().length);
 
-  addExpense(title: string, amount: number, category: ExpenseCategory) {
-    const newExpense: Expense = {
-      id: Date.now().toString(),
+  async addExpense(title: string, amount: number, category: ExpenseCategory) {
+    await addDoc(this.expensesCollection, {
       title,
-      amount,
+      amount: Number(amount),
       category
-    };
-
-    this.expenses.update(currentExpenses => [...currentExpenses, newExpense]);
+    });
   }
 
-  deleteExpense(id: string) {
-    this.expenses.update(currentExpenses =>
-      currentExpenses.filter(expense => expense.id !== id)
-    );
+  async deleteExpense(id: string) {
+    await deleteDoc(doc(this.firestore, `expenses/${id}`));
   }
 
   getExpenseById(id: string) {
     return this.expenses().find(expense => expense.id === id);
   }
 
-  editExpense(updatedExpense: Expense) {
-    this.expenses.update(currentExpenses =>
-      currentExpenses.map(expense =>
-        expense.id === updatedExpense.id ? updatedExpense : expense
-      )
-    );
+  async editExpense(updatedExpense: Expense) {
+    await updateDoc(doc(this.firestore, `expenses/${updatedExpense.id}`), {
+      title: updatedExpense.title,
+      amount: Number(updatedExpense.amount),
+      category: updatedExpense.category
+    });
   }
 }

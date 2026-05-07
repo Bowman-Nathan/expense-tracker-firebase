@@ -1,11 +1,12 @@
 import { Component, Input, Output, EventEmitter } from "@angular/core";
 import { Expense } from "../../models/expense";
 import { RouterLink } from "@angular/router";
+import { CommonModule } from "@angular/common";
 
 
 @Component({
     selector: 'app-expense-item',
-    imports: [RouterLink],
+    imports: [RouterLink, CommonModule],
     templateUrl:'./expense-item.html'
 })
 export class ExpenseItemComponent{

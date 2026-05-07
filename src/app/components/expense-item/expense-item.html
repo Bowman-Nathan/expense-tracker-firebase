@@ -4,7 +4,7 @@
   [style.backgroundColor]="expense.category === 'Food' ? '#fff3cd' : 'White'"
 >
   <h5>{{ expense.title }}</h5>
-  <p>Amount: ${{ expense.amount.toFixed(2) }}</p>
+  <p>Amount: ${{ +expense.amount | number: '1.2-2' }}</p>
   <p>Category: {{ expense.category }}</p>
 
   <div class="d-flex gap-2">
