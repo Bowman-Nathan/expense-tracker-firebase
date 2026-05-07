@@ -34,6 +34,28 @@
       (ngModelChange)="endDate.set($event)"
     />
   </label>
+
+  <label>
+    Min Amount
+    <input
+      class="date-input"
+      type="number"
+      placeholder="0"
+      [ngModel]="minAmount()"
+      (ngModelChange)="minAmount.set($event)"
+    />
+  </label>
+
+  <label>
+    Max Amount
+    <input
+      class="date-input"
+      type="number"
+      placeholder="100"
+      [ngModel]="maxAmount()"
+      (ngModelChange)="maxAmount.set($event)"
+    />
+  </label>
 </div>
 
 @for (expense of expenses(); track expense.id) {

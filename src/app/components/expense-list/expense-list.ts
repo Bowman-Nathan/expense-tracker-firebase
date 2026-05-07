@@ -22,6 +22,8 @@ export class ExpenseListComponent {
   selectedCategory = signal('All');
   startDate = signal('');
   endDate = signal('');
+  minAmount = signal('');
+  maxAmount = signal('');
 
   constructor(public expenseService: ExpenseService) {}
 
@@ -39,7 +41,21 @@ export class ExpenseListComponent {
       this.endDate() === '' ||
       expense.date <= this.endDate();
 
-    return categoryMatches && startMatches && endMatches;
+    const minMatches =
+      this.minAmount() === '' ||
+      Number(expense.amount) >= Number(this.minAmount());
+
+    const maxMatches =
+      this.maxAmount() === '' ||
+      Number(expense.amount) <= Number(this.maxAmount());
+
+    return (
+      categoryMatches &&
+      startMatches &&
+      endMatches &&
+      minMatches &&
+      maxMatches
+    );
   });
 });
 
