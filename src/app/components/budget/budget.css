@@ -1,0 +1,26 @@
+.budget-form {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.budget-results {
+  margin-top: 24px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 16px;
+}
+
+.budget-result-card {
+  padding: 12px;
+}
+
+.over-budget {
+  border: 2px solid red;
+}
+
+.warning-text {
+  color: red;
+  font-weight: bold;
+}

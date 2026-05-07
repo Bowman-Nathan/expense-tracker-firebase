@@ -4,6 +4,7 @@ import { ExpenseItemComponent} from '../expense-item/expense-item';
 import { FormsModule } from '@angular/forms';
 import { MatSelectModule } from '@angular/material/select';
 import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from "@angular/material/input";
 
 @Component({
   selector: 'app-expense-list',
@@ -12,7 +13,8 @@ import { MatFormFieldModule } from '@angular/material/form-field';
     ExpenseItemComponent,
     FormsModule,
     MatSelectModule,
-    MatFormFieldModule
+    MatFormFieldModule,
+    MatInputModule
   ],
   templateUrl: './expense-list.html'
 })

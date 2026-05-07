@@ -1,0 +1,58 @@
+<h2 class="mb-4">Budget Planning</h2>
+
+<mat-card class="budget-card">
+  <mat-card-content>
+    <div class="budget-form">
+      <mat-form-field appearance="outline">
+        <mat-label>Category</mat-label>
+
+        <mat-select [ngModel]="selectedCategory()" (ngModelChange)="selectedCategory.set($event)">
+          <mat-option value="Work">Work</mat-option>
+          <mat-option value="Personal">Personal</mat-option>
+          <mat-option value="Grocery">Grocery</mat-option>
+          <mat-option value="Utilities">Utilities</mat-option>
+          <mat-option value="Shopping">Shopping</mat-option>
+          <mat-option value="Travel">Travel</mat-option>
+          <mat-option value="Food">Food</mat-option>
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Budget Amount</mat-label>
+
+        <input
+          matInput
+          type="number"
+          [ngModel]="budgetAmount()"
+          (ngModelChange)="budgetAmount.set($event)"
+        />
+      </mat-form-field>
+
+      <button mat-raised-button color="primary" (click)="saveBudget()">Save Budget</button>
+    </div>
+  </mat-card-content>
+</mat-card>
+
+<div class="budget-results">
+  @for (category of expenseService.categories(); track category) {
+    <mat-card class="budget-result-card" [class.over-budget]="isOverBudget(category)">
+      <mat-card-title>
+        {{ category }}
+      </mat-card-title>
+
+      <mat-card-content>
+        <p>Budget: ${{ budgets()[category] || 0 }}</p>
+
+        <p>Spent: ${{ spentForCategory(category).toFixed(2) }}</p>
+
+        <p>
+          Remaining: ${{ ((budgets()[category] || 0) - spentForCategory(category)).toFixed(2) }}
+        </p>
+
+        @if (isOverBudget(category)) {
+          <p class="warning-text">Over Budget!</p>
+        }
+      </mat-card-content>
+    </mat-card>
+  }
+</div>
