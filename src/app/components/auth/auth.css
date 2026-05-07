@@ -1,0 +1,14 @@
+.auth-card {
+  max-width: 500px;
+}
+
+.auth-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.auth-buttons {
+  display: flex;
+  gap: 12px;
+}

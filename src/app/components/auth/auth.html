@@ -1,0 +1,37 @@
+<h2 class="mb-4">Login / Register</h2>
+
+<mat-card class="auth-card">
+  <mat-card-content>
+    @if (authService.currentUser()) {
+      <p>
+        Logged in as:
+        <strong>{{ authService.currentUser()?.email }}</strong>
+      </p>
+
+      <button mat-raised-button color="warn" (click)="logout()">Logout</button>
+    } @else {
+      <div class="auth-form">
+        <mat-form-field appearance="outline">
+          <mat-label>Email</mat-label>
+          <input matInput type="email" [ngModel]="email()" (ngModelChange)="email.set($event)" />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input
+            matInput
+            type="password"
+            [ngModel]="password()"
+            (ngModelChange)="password.set($event)"
+          />
+        </mat-form-field>
+
+        <div class="auth-buttons">
+          <button mat-raised-button color="primary" (click)="login()">Login</button>
+
+          <button mat-raised-button color="accent" (click)="register()">Register</button>
+        </div>
+      </div>
+    }
+  </mat-card-content>
+</mat-card>
