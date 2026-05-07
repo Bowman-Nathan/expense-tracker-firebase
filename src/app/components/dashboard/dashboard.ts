@@ -1,9 +1,10 @@
 import { Component } from "@angular/core";
 import { ExpenseService } from "../../services/expense-service";
+import { MatCardModule } from "@angular/material/card";
 
 @Component({
     selector: 'app-dashboard',
-    imports: [],
+    imports: [MatCardModule],
     templateUrl: './dashboard.html'
 })
 export class DashboardComponent {
