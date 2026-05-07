@@ -1,0 +1,5 @@
+<h2>Expenses</h2>
+
+@for (expense of expenseService.expenses(); track expense.id) {
+  <app-expense-item [expense]="expense" (delete)="deleteExpense($event)"> </app-expense-item>
+}

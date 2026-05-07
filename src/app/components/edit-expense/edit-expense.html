@@ -1,0 +1,31 @@
+<h2>Edit Expense</h2>
+
+<div class="card p-4">
+  <div class="mb-3">
+    <label class="form-label">Title</label>
+
+    <input class="form-control" [(ngModel)]="title" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Amount</label>
+
+    <input class="form-control" type="number" [(ngModel)]="amount" />
+  </div>
+
+  <div class="mb-3">
+    <label class="form-label">Category</label>
+
+    <select class="form-control" [(ngModel)]="category">
+      <option>Work</option>
+      <option>Personal</option>
+      <option>Grocery</option>
+      <option>Utilities</option>
+      <option>Shopping</option>
+      <option>Travel</option>
+      <option>Food</option>
+    </select>
+
+    <button class="btn btn-success" (click)="saveExpense()">Save Changes</button>
+  </div>
+</div>
