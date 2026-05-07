@@ -24,3 +24,8 @@
 mat-form-field {
   width: 100%;
 }
+
+.expense-card {
+    margin-bottom: 16px;
+    padding: 12px;
+}

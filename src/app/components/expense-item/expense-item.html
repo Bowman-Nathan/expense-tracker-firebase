@@ -1,15 +1,14 @@
-<div
-  class="card mb-3 p-3"
-  [class.border-danger]="expense.amount >= 1000"
-  [style.backgroundColor]="expense.category === 'Food' ? '#fff3cd' : 'White'"
->
-  <h5>{{ expense.title }}</h5>
-  <p>Amount: ${{ +expense.amount | number: '1.2-2' }}</p>
-  <p>Category: {{ expense.category }}</p>
+<mat-card class="expense-card">
+  <mat-card-title>{{ expense.title }}</mat-card-title>
 
-  <div class="d-flex gap-2">
-    <button class="btn btn-danger btn-sm" (click)="deleteExpense()">Delete</button>
+  <mat-card-content>
+    <p>Amount: ${{ +expense.amount | number: '1.2-2' }}</p>
+    <p>Category: {{ expense.category }}</p>
+  </mat-card-content>
 
-    <a class="btn btn-warning btn-sm" [routerLink]="['/edit', expense.id]"> Edit </a>
-  </div>
-</div>
+  <mat-card-actions>
+    <button mat-raised-button color="warn" (click)="deleteExpense()">Delete</button>
+
+    <a mat-raised-button color="accent" [routerLink]="['/edit', expense.id]"> Edit </a>
+  </mat-card-actions>
+</mat-card>
